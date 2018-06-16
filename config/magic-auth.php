@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This URI is used to prefix all magic authentication routes. You may
-    | change this value as required, but don't forget the update your forms!
+    | change this value as required, but don't forget to update your forms!
     |
     */
 
