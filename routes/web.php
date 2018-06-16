@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('email', 'LoginController@sendMagicLinkEmail')
-    ->name('magic.email')->middleware('throttle:1,5');
+Route::post('email', 'LinkController@sendMagicLinkEmail')
+    ->name('magic.email')->middleware('throttle:5,5');
 
 Route::get('login', 'LoginController@login')
-    ->name('magic.login')->middleware('signed');
+    ->name('magic.login')->middleware('throttle:12,60');

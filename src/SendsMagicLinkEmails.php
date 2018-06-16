@@ -22,9 +22,9 @@ trait SendsMagicLinkEmails
             $request->only('email')
         );
 
-        // To-do: send user not found notification:
-
-        return $this->sendMagicLinkResponse($response);
+        return $response == LinkBroker::MAGIC_LINK_SENT
+            ? $this->sendMagicLinkResponse($response)
+            : $this->sendMagicLinkFailedResponse($request);
     }
 
     /**
@@ -52,14 +52,26 @@ trait SendsMagicLinkEmails
     }
 
     /**
+     * Get the response for a failed magic link.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     */
+    protected function sendMagicLinkFailedResponse(Request $request)
+    {
+        // We will send the success response to prevent user enumeration
+        return $this->sendMagicLinkResponse(LinkBroker::MAGIC_LINK_SENT);
+    }
+
+    /**
      * Get the broker to be used during magic authentication.
      *
      * @return \Soved\Laravel\Magic\Auth\Links\LinkBroker
      */
     public function broker()
     {
-        return new LinkBroker(
-            Auth::getProvider()
-        );
+        $userProvider = Auth::getProvider();
+
+        return new LinkBroker($userProvider);
     }
 }

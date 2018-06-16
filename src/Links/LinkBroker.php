@@ -2,6 +2,8 @@
 
 namespace Soved\Laravel\Magic\Auth\Links;
 
+use Closure;
+use Illuminate\Http\Request;
 use UnexpectedValueException;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Contracts\Auth\UserProvider;
@@ -39,8 +41,7 @@ class LinkBroker implements LinkBrokerContract
         $user = $this->getUser($credentials);
 
         if (is_null($user)) {
-            // To-do: send user not found notification:
-            return;
+            return static::INVALID_USER;
         }
 
         $user->sendMagicLinkNotification(
@@ -48,6 +49,49 @@ class LinkBroker implements LinkBrokerContract
         );
 
         return static::MAGIC_LINK_SENT;
+    }
+
+    /**
+     * Log the user into the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $callback
+     * @return mixed
+     */
+    public function login(
+        Request $request,
+        Closure $callback
+    ) {
+        $user = $this->validateLogin($request);
+
+        if (!$user instanceof CanMagicallyLoginContract) {
+            return $user;
+        }
+
+        $callback($user);
+
+        return static::USER_AUTHENTICATED;
+    }
+
+    /**
+     * Validate a magic authentication request for the given user.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Soved\Laravel\Magic\Auth\Traits\CanMagicallyLogin|string
+     */
+    protected function validateLogin(Request $request)
+    {
+        $credentials = $request->only('email');
+
+        if (is_null($user = $this->getUser($credentials))) {
+            return static::INVALID_USER;
+        }
+
+        if (!$request->hasValidSignature()) {
+            return static::INVALID_SIGNATURE;
+        }
+
+        return $user;
     }
 
     /**
@@ -77,7 +121,7 @@ class LinkBroker implements LinkBrokerContract
      */
     public function createMagicLink(CanMagicallyLoginContract $user)
     {
-        $email = $user->getEmailForPasswordReset();
+        $email = $user->getEmailForMagicLink();
 
         return URL::temporarySignedRoute(
             'magic.login',

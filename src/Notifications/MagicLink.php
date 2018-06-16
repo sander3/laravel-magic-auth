@@ -21,7 +21,7 @@ class MagicLink extends Notification
      * @param  string  $link
      * @return void
      */
-    public function __construct($link)
+    public function __construct(string $link)
     {
         $this->link = $link;
     }
