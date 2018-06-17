@@ -39,15 +39,14 @@ trait SendsMagicLinkEmails
     }
 
     /**
-     * Get the response for a successful magic link.
+     * Get the response for a successfully sent magic link.
      *
      * @param  string  $response
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     protected function sendMagicLinkResponse(string $response)
     {
         // To-do: create translation files:
-
         return back()->with('status', __($response));
     }
 
@@ -55,7 +54,7 @@ trait SendsMagicLinkEmails
      * Get the response for a failed magic link.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     protected function sendMagicLinkFailedResponse(Request $request)
     {

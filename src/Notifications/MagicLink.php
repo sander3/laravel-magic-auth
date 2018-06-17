@@ -30,11 +30,11 @@ class MagicLink extends Notification
      * Get the notification's channels.
      *
      * @param  mixed  $notifiable
-     * @return array|string
+     * @return string
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return 'mail';
     }
 
     /**

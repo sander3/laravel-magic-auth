@@ -56,7 +56,7 @@ class LinkBroker implements LinkBrokerContract
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $callback
-     * @return mixed
+     * @return string
      */
     public function login(
         Request $request,
@@ -125,9 +125,9 @@ class LinkBroker implements LinkBrokerContract
 
         return URL::temporarySignedRoute(
             'magic.login',
-            now()->addMinutes(5),
+            now()->addMinutes(5), // To-do: create a config option
             [
-                'email' => $email,
+                'email' => $email, // To-do: add more parameters for insurance
             ]
         );
     }

@@ -15,7 +15,7 @@ trait AuthenticatesUsers
      * Handle a magic authentication request to the application.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function login(Request $request)
     {
@@ -64,19 +64,35 @@ trait AuthenticatesUsers
     {
         $request->session()->regenerate();
 
-        return redirect($this->redirectPath());
+        return $this->authenticated($request, $this->guard()->user())
+            ?: redirect()->intended($this->redirectPath());
+    }
+
+    /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticated(
+        Request $request,
+        $user
+    ) {
+        //
     }
 
     /**
      * Get the failed login response instance.
      *
      * @param  string  $response
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     protected function sendFailedLoginResponse(string $response)
     {
+        // To-do: create translation files:
         return redirect($this->redirectPath())
-            ->with('status', __($response));
+            ->withErrors(['email' => __($response)]);
     }
 
     /**

@@ -2,6 +2,9 @@
 
 namespace Soved\Laravel\Magic\Auth\Contracts;
 
+use Closure;
+use Illuminate\Http\Request;
+
 interface LinkBroker
 {
     /**
@@ -39,4 +42,16 @@ interface LinkBroker
      * @return string
      */
     public function sendMagicLink(array $credentials);
+
+    /**
+     * Log the user into the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $callback
+     * @return string
+     */
+    public function login(
+        Request $request,
+        Closure $callback
+    );
 }
