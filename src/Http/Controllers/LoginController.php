@@ -12,10 +12,7 @@ class LoginController extends Controller
     /**
      * Where to redirect users after login.
      *
-     * @return string
+     * @var string
      */
-    public function redirectTo()
-    {
-        return '/home'; // To-do: create a config option
-    }
+    protected $redirectTo = '/login';
 }

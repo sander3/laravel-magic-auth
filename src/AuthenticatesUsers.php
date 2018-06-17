@@ -90,7 +90,6 @@ trait AuthenticatesUsers
      */
     protected function sendFailedLoginResponse(string $response)
     {
-        // To-do: create translation files:
         return redirect($this->redirectPath())
             ->withErrors(['email' => __($response)]);
     }

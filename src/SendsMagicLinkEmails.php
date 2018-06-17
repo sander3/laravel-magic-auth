@@ -46,7 +46,6 @@ trait SendsMagicLinkEmails
      */
     protected function sendMagicLinkResponse(string $response)
     {
-        // To-do: create translation files:
         return back()->with('status', __($response));
     }
 

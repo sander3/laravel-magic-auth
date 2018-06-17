@@ -12,28 +12,28 @@ interface LinkBroker
      *
      * @var string
      */
-    const MAGIC_LINK_SENT = 'magic.link_sent';
+    const MAGIC_LINK_SENT = 'magic-auth::messages.link_sent';
 
     /**
      * Constant representing a successful magic login.
      *
      * @var string
      */
-    const USER_AUTHENTICATED = 'magic.authenticated';
+    const USER_AUTHENTICATED = 'magic-auth::messages.authenticated';
 
     /**
      * Constant representing the user not found response.
      *
      * @var string
      */
-    const INVALID_USER = 'magic.user';
+    const INVALID_USER = 'magic-auth::messages.user';
 
     /**
      * Constant representing an invalid signature.
      *
      * @var string
      */
-    const INVALID_SIGNATURE = 'magic.signature';
+    const INVALID_SIGNATURE = 'magic-auth::messages.signature';
 
     /**
      * Send a magic link to a user.

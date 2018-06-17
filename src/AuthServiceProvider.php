@@ -15,6 +15,7 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerRoutes();
+        $this->registerTranslations();
     }
 
     /**
@@ -31,6 +32,18 @@ class AuthServiceProvider extends ServiceProvider
         ], function () {
             $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         });
+    }
+
+    /**
+     * Register the magic authentication translations.
+     *
+     * @return void
+     */
+    protected function registerTranslations()
+    {
+        $this->loadTranslationsFrom(
+            __DIR__ . '/../resources/lang', 'magic-auth'
+        );
     }
 
     /**
@@ -67,6 +80,10 @@ class AuthServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__ . '/../config/magic-auth.php' => config_path('magic-auth.php'),
             ], 'magic-auth-config');
+
+            $this->publishes([
+                __DIR__ . '/../resources/lang' => resource_path('lang/vendor/magic-auth'),
+            ], 'magic-auth-lang');
         }
     }
 }
