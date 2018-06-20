@@ -18,4 +18,11 @@ interface CanMagicallyLogin
      * @return void
      */
     public function sendMagicLinkNotification(string $link);
+
+    /**
+     * Determine if the user was authenticated via a magic link.
+     *
+     * @return bool
+     */
+    public function viaMagicLink();
 }

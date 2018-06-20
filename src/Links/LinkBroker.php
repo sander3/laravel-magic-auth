@@ -81,7 +81,11 @@ class LinkBroker implements LinkBrokerContract
      */
     protected function validateLogin(Request $request)
     {
-        $credentials = $request->only('email');
+        $credentials = $request->only([
+            'id',
+            'email',
+            'updated_at',
+        ]);
 
         if (is_null($user = $this->getUser($credentials))) {
             return static::INVALID_USER;
@@ -127,7 +131,9 @@ class LinkBroker implements LinkBrokerContract
             'magic.login',
             now()->addMinutes(5), // To-do: create a config option
             [
-                'email' => $email, // To-do: add more parameters for insurance
+                'id'         => $user->id,
+                'email'      => $email,
+                'updated_at' => $user->updated_at,
             ]
         );
     }

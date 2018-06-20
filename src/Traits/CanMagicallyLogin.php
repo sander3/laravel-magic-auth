@@ -26,4 +26,14 @@ trait CanMagicallyLogin
     {
         $this->notify(new MagicLinkNotification($link));
     }
+
+    /**
+     * Determine if the user was authenticated via a magic link.
+     *
+     * @return bool
+     */
+    public function viaMagicLink()
+    {
+        return session('viaMagicLink', false);
+    }
 }
