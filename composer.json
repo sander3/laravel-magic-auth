@@ -1,6 +1,7 @@
 {
     "name": "soved/laravel-magic-auth",
     "description": "Authenticate users using a magic link",
+    "keywords": ["laravel", "magic-authentication", "soved", "authentication", "encryption"],
     "type": "library",
     "require": {
         "php": "^7.1.3",
