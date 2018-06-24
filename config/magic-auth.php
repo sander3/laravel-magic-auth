@@ -14,4 +14,16 @@ return [
 
     'uri' => 'magic',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Expiration Time
+    |--------------------------------------------------------------------------
+    |
+    | The expiration time is the number of minutes that the magic link should
+    | be considered valid.
+    |
+    */
+
+    'expiration' => 5,
+
 ];

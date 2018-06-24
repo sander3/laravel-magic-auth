@@ -129,7 +129,7 @@ class LinkBroker implements LinkBrokerContract
 
         return URL::temporarySignedRoute(
             'magic.login',
-            now()->addMinutes(5), // To-do: create a config option
+            now()->addMinutes(config('magic-auth.expiration')),
             [
                 'id'         => $user->id,
                 'email'      => $email,

@@ -1,5 +1,12 @@
 # Authenticate users using a magic link
 
+Fast and secure passwordless authentication for the masses.
+
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sander3/laravel-magic-auth/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sander3/laravel-magic-auth/?branch=master)
+[![Latest Stable Version](https://poser.pugx.org/soved/laravel-magic-auth/v/stable)](https://packagist.org/packages/soved/laravel-magic-auth)
+[![Monthly Downloads](https://poser.pugx.org/soved/laravel-magic-auth/d/monthly)](https://packagist.org/packages/soved/laravel-magic-auth)
+[![License](https://poser.pugx.org/soved/laravel-magic-auth/license)](https://packagist.org/packages/soved/laravel-magic-auth)
+
 ## Requirements
 
 - PHP >= 7.1.3
@@ -39,6 +46,14 @@ class User extends Authenticatable implements CanMagicallyLoginContract
 ```
 
 Finally, add the `Soved\Laravel\Magic\Auth\Traits\CanMagicallyLogin` trait to the `App\User` model to implement the interface.
+
+## Usage
+
+This package exposes two endpoints, one to request a magic link (`magic/email`) and one to authenticate using the magic link (`magic/login`). Your application should make a POST call, containing the user's email address, to request a magic link. The magic link will be send via email using a notification. Feel free to customize the notification by overriding the `CanMagicallyLogin@sendMagicLinkNotification` method.
+
+### Middleware
+
+You may want to register the `Soved\Laravel\Magic\Auth\Http\Middleware\AuthenticateWithMagicLink` middleware to ensure users are authenticated via a magic link.
 
 ## Security Vulnerabilities
 
