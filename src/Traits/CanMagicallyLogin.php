@@ -34,6 +34,6 @@ trait CanMagicallyLogin
      */
     public function viaMagicLink()
     {
-        return session()->has('viaMagicLink') === true;
+        return session('viaMagicLink', false);
     }
 }
