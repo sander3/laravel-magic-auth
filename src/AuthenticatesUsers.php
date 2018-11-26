@@ -79,7 +79,9 @@ trait AuthenticatesUsers
         Request $request,
         $user
     ) {
-        $request->session()->put('viaMagicLink', true);
+        $email = $user->getEmailForMagicLink();
+
+        $request->session()->put('viaMagicLink', $email);
 
         // Invalidating all unexpired magic links
         $user->touch();
