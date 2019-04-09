@@ -51,7 +51,7 @@ trait AuthenticatesUsers
      */
     protected function authenticateUser($user)
     {
-        $this->guard()->login($user);
+        $this->guard()->login($user, config('magic-auth.remember'));
     }
 
     /**

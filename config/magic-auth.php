@@ -26,4 +26,16 @@ return [
 
     'expiration' => 5,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Remembering Users
+    |--------------------------------------------------------------------------
+    |
+    | If you would like to provide "remember me" functionality in your
+    | application, you may set this value to true.
+    |
+    */
+
+    'remember' => false,
+
 ];
