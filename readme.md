@@ -10,7 +10,7 @@ Fast and secure passwordless authentication for the masses.
 ## Requirements
 
 - PHP >= 7.1.3
-- Laravel >= 5.6
+- Laravel >= 5.6 or 6.0
 
 ## Installation
 
