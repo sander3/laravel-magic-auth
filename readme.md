@@ -7,6 +7,8 @@ Fast and secure passwordless authentication for the masses.
 [![Monthly Downloads](https://poser.pugx.org/soved/laravel-magic-auth/d/monthly)](https://packagist.org/packages/soved/laravel-magic-auth)
 [![License](https://poser.pugx.org/soved/laravel-magic-auth/license)](https://packagist.org/packages/soved/laravel-magic-auth)
 
+[Buy me a coffee ☕️](https://www.buymeacoffee.com/sander3)
+
 ## Requirements
 
 - PHP >= 7.1.3
